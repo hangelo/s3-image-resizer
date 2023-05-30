@@ -1,0 +1,21 @@
+{
+    "name": "ubuntu/aws-s3-image-resize",
+    "require": {
+        "aws/aws-sdk-php": "^3.257",
+        "gumlet/php-image-resize": "2.0.*",
+        "symfony/yaml": "^6.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ubuntu\\AwsS3ImageResize\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Henrique Paim"
+        }
+    ]
+}
