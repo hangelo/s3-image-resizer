@@ -3,7 +3,7 @@
     "require": {
         "aws/aws-sdk-php": "^3.257",
         "gumlet/php-image-resize": "2.0.*",
-        "symfony/yaml": "^6.2"
+        "symfony/yaml": ">=5.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4"
