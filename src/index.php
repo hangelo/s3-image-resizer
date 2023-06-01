@@ -73,7 +73,7 @@ class ResizeImage {
      */
     function __construct($imageUrl, $width, $height, $mode) {
         // Load the AWS credentials and other settings
-        $ymlFile = Yaml::parseFile('environment.yml');
+        $ymlFile = Yaml::parseFile(__DIR__.'/../environment.yml');
         $this->AWS_ACCESS_KEY = $ymlFile['AWS_ACCESS_KEY_ID'];
         $this->AWS_SECRET_KEY = $ymlFile['AWS_SECRET_ACCESS_KEY'];
         $this->AWS_REGION = $ymlFile['AWS_REGION'];
