@@ -13,7 +13,7 @@ $height = isset($_GET['h']) ? trim($_GET['h']) : 90;
 $imageUrl = isset($_GET['img']) ? trim($_GET['img']) : null;
 
 // Validate if an image is given
-if ($imageUrl == null || $imageUrl != '') {
+if ($imageUrl == null || $imageUrl == '') {
     header('HTTP/1.0 404 Not Found');
     exit;
 }
