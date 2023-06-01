@@ -8,12 +8,15 @@ use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 use Symfony\Component\Yaml\Yaml;
 
-$width = isset($_GET['w']) ? $_GET['w'] : 300;
-$height = isset($_GET['h']) ? $_GET['h'] : 450;
-$imageUrl = isset($_GET['img']) ? $_GET['img'] : '';
+$width = isset($_GET['w']) ? trim($_GET['w']) : 90;
+$height = isset($_GET['h']) ? trim($_GET['h']) : 90;
+$imageUrl = isset($_GET['img']) ? trim($_GET['img']) : null;
 
-$imageUrl = 'galerias/emp-162/leiloes/lei-2418/lotes/lot-623895/C3hlEVwc.jpg';
-
+// Validate if an image is given
+if ($imageUrl == null || $imageUrl != '') {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 
 class ResizeImage {
 
