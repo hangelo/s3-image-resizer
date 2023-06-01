@@ -10,7 +10,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Ubuntu\\AwsS3ImageResize\\": "src/"
+            "Ubuntu\\AwsS3ImageResize\\": "src/",
+            "ResizeImage\\": "src/",
+            "Constants\\": "src/",
+            "Validations\\": "src/"
         }
     },
     "authors": [
