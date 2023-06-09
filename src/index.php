@@ -31,4 +31,4 @@ else {
     $resizeImage->resizeImage();
     $resizeImage->uploadImage();
 }
-$resizeImage->outputImage();
+$outputImage = $resizeImage->outputImage();

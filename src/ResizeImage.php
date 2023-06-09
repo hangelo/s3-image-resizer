@@ -137,12 +137,18 @@ class ResizeImage {
         $image = new ImageResize('data:image/jpeg;base64,'.base64_encode($this->downloadedFileData));
         $image->quality_jpg = Constants::$RESIZE_QUALITY;
         // Crop the image by resizing til the smaller side and centered crop the larger side
-        $image->crop($this->dimensionWidth, $this->dimensionHeight, true, ImageResize::CROPCENTER);
+        //$image->crop($this->dimensionWidth, $this->dimensionHeight, true, ImageResize::CROPCENTER);
+        $image->resizeToBestFit($this->dimensionWidth, $this->dimensionHeight, true);
 
         // Save the resized image as a file
-        $image->save(Constants::$LOCAL_CACHE_DIR.$this->imageFileNameResized);
-    }
+        //$image->save(Constants::$LOCAL_CACHE_DIR.$this->imageFileNameResized);
+        $image->save(Constants::$LOCAL_CACHE_DIR.$this->imageFileNameResized, null, null, null, [$this->dimensionWidth, $this->dimensionHeight]);
 
+        // Delete the original image
+        $this->outputDump('Deleting local original image');
+        unlink(Constants::$LOCAL_CACHE_DIR.$this->imageFileNameOriginal);
+    }
+//
     private function getS3Instance() {
         if ($this->s3Client == null) {
             $this->s3Client = new S3Client([
@@ -173,8 +179,13 @@ class ResizeImage {
                 )
             ]);
 
-            // Return the public URL of the uploaded image
-            $this->outputDump($result['ObjectURL']);
+
+            // Delete the resized image
+            $this->outputDump('Deleting local resized image');
+            //unlink(Constants::$LOCAL_CACHE_DIR.$this->imageFileNameResized);
+
+            //// Return the public URL of the uploaded image
+            $this->outputDump('Resized image: '.$result['ObjectURL']);
             return $result['ObjectURL'];
         } catch (S3Exception $e) {
             throw new Exception('Error uploading the image: ' . $e->getMessage());
@@ -221,6 +232,10 @@ class ResizeImage {
 
         // Output just the image content
         readfile($localFile);
+
+        unlink($localFile);
+
+        //return $localFile;
     }
 
 }
