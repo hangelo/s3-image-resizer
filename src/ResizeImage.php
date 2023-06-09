@@ -55,7 +55,7 @@ class ResizeImage {
      * @param Integer $height
      * @param String $mode
      */
-    function __construct($imageUrl, $width, $height, $mode) {
+    function __construct($imageUrl, $width, $height, $mode, $version) {
         // Load the AWS credentials and other settings
         $ymlFile = Yaml::parseFile(__DIR__.'/../environment.yml');
         $this->AWS_ACCESS_KEY = $ymlFile['AWS_ACCESS_KEY_ID'];
@@ -73,7 +73,7 @@ class ResizeImage {
         $this->imageExtension = pathinfo($imageUrl, PATHINFO_EXTENSION);
         $this->imageFileNameOriginal = pathinfo($imageUrl, PATHINFO_FILENAME).'.'.$this->imageExtension;
         $this->imageFullNameOriginal = $this->imagePath.'/'.$this->imageFileNameOriginal;
-        $this->imageFileNameResized = pathinfo($imageUrl, PATHINFO_FILENAME).'-w'.$width.'-h'.$height.'-m'.$mode.'.'.$this->imageExtension;
+        $this->imageFileNameResized = pathinfo($imageUrl, PATHINFO_FILENAME).$version.'-w'.$width.'-h'.$height.'-m'.$mode.'.'.$this->imageExtension;
         $this->imageFullNameResized = $this->imagePath.'/'.$this->imageFileNameResized;
     }
 
